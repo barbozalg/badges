@@ -1,4 +1,4 @@
-package barbozalg.access_modifiers;
+package barbozalg.other_package;
 
 public class scope {
     private int a;
@@ -12,13 +12,13 @@ public class scope {
         this.c = 3;
         this.d = 4;
 
-        System.out.println("----- Read From class -----");
+        System.out.println("----- Read From same Class -----");
         System.out.println("private int a: " + this.a);
         System.out.println("int b (Default): " + this.b);
         System.out.println("protected int c: " + this.c);
         System.out.println("public int d: " + this.d + "\n");
 
-        System.out.println("----- Write From class -----");
+        System.out.println("----- Write From same Class -----");
         this.a += 1;
         System.out.println("private int a: " + this.a);
         this.b += 1;
