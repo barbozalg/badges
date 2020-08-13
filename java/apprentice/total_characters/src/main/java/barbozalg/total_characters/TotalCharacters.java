@@ -24,6 +24,7 @@ public class TotalCharacters {
 
     private static final int STRING_LENGTH = 1024;
     private static final int MESSAGE_FREQUENCY = 1000;
+    private static final int DEBUG_FREQUENCY = 10000;
     private static MemoryMXBean memoryMXbean = ManagementFactory.getMemoryMXBean();
     private static List<String> string_list = new LinkedList<>();
 
@@ -40,6 +41,9 @@ public class TotalCharacters {
                 string_list.add(repeat("A"));
                 if (i % MESSAGE_FREQUENCY == 0) {
                     LOGGER.info("Current count: " + ANSI_CYAN + i + ANSI_WHITE);
+                }
+                if (i % DEBUG_FREQUENCY == 0) {
+                    LOGGER.debug("Debug point at " + i);
                 }
             }
         } catch (OutOfMemoryError e) {
