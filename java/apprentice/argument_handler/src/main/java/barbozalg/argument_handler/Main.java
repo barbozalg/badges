@@ -13,6 +13,9 @@ package barbozalg.argument_handler;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.apache.log4j.BasicConfigurator;
+import org.apache.log4j.Logger;
+
 
 class my_int {
     // public member variable
@@ -29,38 +32,41 @@ class my_int {
 @SpringBootApplication
 public class Main implements CommandLineRunner {
 
+    static final Logger logger = Logger.getLogger(Main.class);
+
     public static void main(String[] args) {
         SpringApplication.run(Main.class, args);
     }
 
     public void argument_handler(int a, my_int b, final int c){
-        System.out.println("--- Received in method ---");
-        System.out.println("a: " + a + " (Received by value)");
-        System.out.println("b: " + b.entero + " (Received by reference)");
-        System.out.println("c: " + c + " (Received as final)");
+        logger.info("--- Received in method ---");
+        logger.info("a: " + a + " (Received by value)");
+        logger.info("b: " + b.entero + " (Received by reference)");
+        logger.info("c: " + c + " (Received as final)");
         a += 3;
         b.entero += 3;
         // c += 3;
-        System.out.println("--- Modified in method ---");
-        System.out.println("a: " + a);
-        System.out.println("b: " + b.entero);
-        System.out.println("c: " + c + " (It was not modified because FINAL)");
+        logger.info("--- Modified in method ---");
+        logger.info("a: " + a);
+        logger.info("b: " + b.entero);
+        logger.info("c: " + c + " (It was not modified because FINAL)");
     }
 
     @Override
     public void run(String... args) {
+        BasicConfigurator.configure();
         int x = 1;
         my_int y = new my_int();
         int z = 3;
-        System.out.println("--- Before method ---");
-        System.out.println("x: " + x);
-        System.out.println("y: " + y.entero);
-        System.out.println("z: " + z);
+        logger.info("--- Before method ---");
+        logger.info("x: " + x);
+        logger.info("y: " + y.entero);
+        logger.info("z: " + z);
         argument_handler(x,y,z);
-        System.out.println("--- After method ---");
-        System.out.println("x: " + x + " (Passed by value, it was not modified)");
-        System.out.println("y: " + y.entero + " (It was modified in the method)");
-        System.out.println("z: " + z + " (Passed as final. Can not be modified in the method and does not modified the origin)");
+        logger.info("--- After method ---");
+        logger.info("x: " + x + " (Passed by value, it was not modified)");
+        logger.info("y: " + y.entero + " (It was modified in the method)");
+        logger.info("z: " + z + " (Passed as final. Can not be modified in the method and does not modified the origin)");
     }
 
 }
