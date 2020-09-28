@@ -35,43 +35,7 @@ public class Main implements CommandLineRunner {
                 redFullDeck.putCard(new Card(i, type, "Red"));
             }
         }
-
-        System.out.println("Luis");
-
-
-//        List<Card> people = new ArrayList<>();
-//        System.out.println("Creating a group of people");
-//
-//        System.out.println(String.format("First a default student with id=%s", FIRST_STUDENT_ID));
-//
-//        people.add(new Deck(FIRST_STUDENT_ID));
-//
-//        System.out.println(String.format("And now a student named Jessy with id=%s", SECOND_STUDENT_ID));
-//        people.add(new Deck(SECOND_STUDENT_ID, "Jessy"));
-//
-//        System.out.println(String.format("And now a student named Fred with id=%s, who is 26 years old.", THIRD_STUDENT_ID));
-//        people.add(new Deck(THIRD_STUDENT_ID, "Fred", 26));
-//
-//
-//        System.out.println(String.format("And now a student named George with id=%s, who is 29 years old with a gpa of 1.2", FOURTH_STUDENT_ID));
-//        people.add(new Deck(FOURTH_STUDENT_ID, "George", 29, 1.2));
-//
-//        System.out.println(String.format("And now a random person named Timmy, age 7"));
-//        people.add(new Card(7, "Timmy"));
-//
-//        System.out.println("Outputting all people");
-//        System.out.println(people);
-//
-//        System.out.println("Outputting gpa for those who are students");
-//        for (Card card : people) {
-//            if (card instanceof Deck) {
-//                System.out.println(String.format("Name: %s, GPA=%.2f", card.getType(), ((Deck) card).getGpa()));
-//            }
-//            else {
-//                System.out.println(String.format("%s is not a student", card.getType()));
-//            }
-//        }
-
+        System.out.println("Blue Deck\n" + blueFullDeck.toString());
+        System.out.println("Red Deck\n" + redFullDeck.toString());
     }
-
 }

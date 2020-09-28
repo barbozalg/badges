@@ -52,4 +52,8 @@ public class Deck {
         return MAX;
     }
 
+    public java.lang.String toString(){
+        return "Num of Cards: " + this.MAX + "\nPointer Position: " + this.pointer + "\n";
+    }
+
 }
