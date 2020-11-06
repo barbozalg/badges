@@ -16,12 +16,7 @@ public class Card {
 
 
     public Card(int value, CardType type) throws Exception {
-        this.type = type;
-        this.setColor();
-        this.setValue(value);
-        this.reverseBackGround = "Blue";
-        this.setCovered(true);
-        this.backGround = "White";
+        this(value, type, "Black");
     }
 
     public Card(int value, CardType type, String reverseBackGround) throws Exception {
