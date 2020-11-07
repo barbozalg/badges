@@ -15,12 +15,6 @@ import java.util.List;
 
 public class TotalCharacters {
 
-    public static final String ANSI_RED = "\u001B[31m";
-    public static final String ANSI_YELLOW = "\u001B[33m";
-    public static final String ANSI_BLUE = "\u001B[34m";
-    public static final String ANSI_CYAN = "\u001B[36m";
-    public static final String ANSI_WHITE = "\u001B[37m";
-
     private static final Logger LOGGER = Logger.getLogger(TotalCharacters.class);
 
     private static final int STRING_LENGTH = 1024;
@@ -49,25 +43,28 @@ public class TotalCharacters {
             for (int i = 0; i < 30000000; i++) {
                 string_list.add(repeat("A"));
                 if (i % MESSAGE_FREQUENCY == 0) {
-                    LOGGER.info("Current count: " + ANSI_CYAN + i + ANSI_WHITE);
+                    LOGGER.info(String.format("Current count: %,d", i));
                 }
                 if ((i % DEBUG_FREQUENCY == 0) && (i != 0)){
-                    LOGGER.debug("Debug point at " + ANSI_BLUE + i + ANSI_WHITE);
+                    LOGGER.debug(String.format("Debug point at %,d", i));
                 }
                 if ((i % WARN_FREQUENCY == 0) && (i != 0)){
-                    LOGGER.warn("Warn point at " + ANSI_YELLOW + i + ANSI_WHITE);
+                    LOGGER.warn(String.format("Warn point at %,d", i));
                 }
             }
         } catch (OutOfMemoryError e) {
             usedMemory = memoryMXbean.getHeapMemoryUsage().getUsed();
             length = string_list.size();
             string_list.clear();
-            String msg = ANSI_RED + "\nOut of memory error" + ANSI_WHITE + ", usedMemory=" + ANSI_YELLOW;
-            msg += usedMemory + ANSI_WHITE + ", maxMemory=" + ANSI_CYAN + maxMemory + ANSI_WHITE;
-            msg += "\nStrings in the list: " + ANSI_BLUE + length + ANSI_WHITE + "\nChars in the list: ";
-            msg += ANSI_BLUE + (length * STRING_LENGTH) + ANSI_WHITE + "\nBytes of memory per String: ";
-            msg += ANSI_BLUE + (usedMemory / length) + ANSI_WHITE + "\nBytes of memory per Char: ";
-            msg += ANSI_BLUE + (usedMemory / (length * STRING_LENGTH)) + ANSI_WHITE;
+            String msg = String.format(
+                "\nOut of memory error, usedMemory=%,d, maxMemory=%,d" +
+                "\nStrings in the list: %,d" +
+                "\nChars in the list: %,d" +
+                "\nBytes of memory per String: %,d" +
+                "\nBytes of memory per Char: %,d",
+                usedMemory, maxMemory, length, (length * STRING_LENGTH),
+                (usedMemory / length), (usedMemory / (length * STRING_LENGTH))
+            );
             LOGGER.error(msg);
         } finally {
             string_list.clear();
