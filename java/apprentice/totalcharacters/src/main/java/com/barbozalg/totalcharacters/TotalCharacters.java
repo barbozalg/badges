@@ -21,6 +21,8 @@ public class TotalCharacters {
     private static final int MESSAGE_FREQUENCY = 1000;
     private static final int DEBUG_FREQUENCY = 10000;
     private static final int WARN_FREQUENCY = 100000;
+    private static final int MAX_ITERATION_NUMBER = 30000000;
+
     private static MemoryMXBean memoryMXbean = ManagementFactory.getMemoryMXBean();
     private static List<String> string_list = new LinkedList<>();
 
@@ -40,7 +42,7 @@ public class TotalCharacters {
         LOGGER.debug("Log4j appender configuration is successful !!");
 
         try {
-            for (int i = 0; i < 30000000; i++) {
+            for (int i = 0; i < MAX_ITERATION_NUMBER; i++) {
                 string_list.add(repeat("A"));
                 if (i % MESSAGE_FREQUENCY == 0) {
                     LOGGER.info(String.format("Current count: %,d", i));
