@@ -65,7 +65,7 @@ public class TotalCharacters {
                 usedMemory, maxMemory, length, (length * STRING_LENGTH),
                 (usedMemory / length), (usedMemory / (length * STRING_LENGTH))
             );
-            LOGGER.error(msg);
+            LOGGER.error(msg, e);
         } finally {
             string_list.clear();
         }
