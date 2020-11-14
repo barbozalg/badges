@@ -4,7 +4,8 @@
 
 package com.barbozalg.totalcharacters;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.apache.log4j.PropertyConfigurator;
 
 import java.lang.management.ManagementFactory;
@@ -15,7 +16,7 @@ import java.util.List;
 
 public class TotalCharacters {
 
-    private static final Logger LOGGER = Logger.getLogger(TotalCharacters.class);
+    static Logger LOGGER = LoggerFactory.getLogger(TotalCharacters.class);
 
     private static final int STRING_LENGTH = 1024;
     private static final int MESSAGE_FREQUENCY = 1000;
@@ -45,29 +46,27 @@ public class TotalCharacters {
             for (int i = 0; i < MAX_ITERATION_NUMBER; i++) {
                 string_list.add(repeat("A"));
                 if (i % MESSAGE_FREQUENCY == 0) {
-                    LOGGER.info(String.format("Current count: %,d", i));
+                    LOGGER.info("Current count: {}", i);
                 }
                 if ((i % DEBUG_FREQUENCY == 0) && (i != 0)){
-                    LOGGER.debug(String.format("Debug point at %,d", i));
+                    LOGGER.debug("Debug point at {}", i);
                 }
                 if ((i % WARN_FREQUENCY == 0) && (i != 0)){
-                    LOGGER.warn(String.format("Warn point at %,d", i));
+                    LOGGER.warn("Warn point at {}", i);
                 }
             }
         } catch (OutOfMemoryError e) {
             usedMemory = memoryMXbean.getHeapMemoryUsage().getUsed();
             length = string_list.size();
             string_list.clear();
-            String msg = String.format(
-                "\nOut of memory error, usedMemory=%,d, maxMemory=%,d" +
-                "\nStrings in the list: %,d" +
-                "\nChars in the list: %,d" +
-                "\nBytes of memory per String: %,d" +
-                "\nBytes of memory per Char: %,d",
-                usedMemory, maxMemory, length, (length * STRING_LENGTH),
-                (usedMemory / length), (usedMemory / (length * STRING_LENGTH))
+            String msg = "\n\nOut of memory error, usedMemory={}, maxMemory={}" +
+                "\nStrings in the list: {}" +
+                "\nChars in the list: {}" +
+                "\nBytes of memory per String: {}" +
+                "\nBytes of memory per Char: {}";
+            LOGGER.error(msg, usedMemory, maxMemory, length, (length * STRING_LENGTH),
+                    (usedMemory / length), (usedMemory / (length * STRING_LENGTH)), e
             );
-            LOGGER.error(msg, e);
         } finally {
             string_list.clear();
         }

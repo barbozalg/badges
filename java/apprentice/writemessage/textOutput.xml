@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<Employees>
-  <Employee id="1">
-    <lastname>Barboza</lastname>
-    <firstname>Luis</firstname>
-  </Employee>
-</Employees>
